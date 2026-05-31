@@ -5,9 +5,11 @@ from typing import List
 app = FastAPI()
 
 class User(BaseModel):
+    id: int
     name: str
     age: int
 
+users: List[User] = []
 
 @app.get("/")
 def read_root():
@@ -17,13 +19,18 @@ def read_root():
 def about():
     return {"message": "I am revising Fast API development because of YB Dada."}
 
-# Path Parameter
-@app.get("/user/{user_id}")
-def get_user(user_id: int):
-    return {"user_id": user_id}
+@app.get("/get-users")
+def get_users():
+    return users
 
 # Post 
 @app.post("/create-user")
 def create_user(user: User):
-    return {"message": f"User created: {user.name}, Age: {user.age}"}
+    users.append(user)
+    return {"message": f"User created: {user.name}, Age: {user.age}, User:[{user}]"}
 
+
+# Path Parameter
+# @app.get("/user/{user_id}")
+# def get_user(user_id: int):
+#     return {"user_id": user_id}
