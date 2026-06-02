@@ -81,3 +81,97 @@ Always use wraps.
 a) take a function
 b) add extra behavior
 c) return modified function
+
+
+### Now I will learn Generators
+A special function that produces values one at a time instead of all at once.
+
+A normal function return once and finishes execution.
+
+While Generators pauses execution, remembers state and continues later.
+
+#### Why Generators exists?
+Think of 
+```python
+numbers = [1,2,3,4,5,... huge list]
+```
+Huge memory usage.
+Generator solves this by:
+a) generating values only when needed
+b) memory efficient
+c) lazy execution
+
+##### First Generator Example
+Normal function:
+```python
+def normal_function():
+    return 1
+```
+
+Generator:
+```python
+def generator_function():
+    yield 1
+```
+
+In generator:
+return becomes yield
+
+Important Idea:
+Generator pauses after every yield.
+
+It remembers:
+variables
+execution position
+state
+
+This is the magic.
+
+#### Generator vs Return
+
+Normal function:
+```python
+def f():
+    return 1
+    return 2
+```
+Impossible.
+
+Generator:
+```python
+def g():
+    yield 1
+    yield 2
+```
+Possible.
+
+
+Generators are used in Large number generations and few operations because of Memory efficient nature.
+
+
+#### Generator Expression
+Like list comprehension.
+
+List:
+```python
+x = [i*i for i in range(5)]
+```
+Generator:
+```python
+x = (i*i for i in range(5))
+```
+Difference:
+a) list stores all values
+b) generator creates values lazily
+
+
+##### Why Generators Are Powerful
+
+Used in:
+a) large file processing
+b) streaming data
+c) APIs
+d) machine learning pipelines
+e) web scraping
+f) async systems
+g) big data
