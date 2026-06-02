@@ -34,3 +34,21 @@ After that proceeding towards basic request parsing and then running on localhos
 
 ### Technology used
 Standard python library socket and json.
+
+
+Understand Client and Server Architecture using sockets.
+SERVER SIDE                     CLIENT SIDE
+─────────────                   ──────────
+socket()                        socket()
+    │                              │
+bind(IP, Port)               connect(IP, Port)
+    │                              │
+listen()                  ◄───────────────
+    │
+accept() ──► creates new socket
+    │
+    │
+send() / recv() ◄─────────► send() / recv()
+    │
+close()                           close()
+
