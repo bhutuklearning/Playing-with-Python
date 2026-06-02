@@ -35,7 +35,7 @@ After that proceeding towards basic request parsing and then running on localhos
 ### Technology used
 Standard python library socket and json.
 
-
+For building a backend framework, one must understand Client and Server architecture in terms of sockets.
 Understand Client and Server Architecture using sockets.
 SERVER SIDE                     CLIENT SIDE
 ─────────────                   ──────────
@@ -52,3 +52,9 @@ send() / recv() ◄─────────► send() / recv()
     │
 close()                           close()
 
+
+There are three sockets used in client-server connection and data flow.
+Socket	   Location	     Purpose
+Socket 1	 Client side	  Used by client to connect & communicate
+Socket 2	 Server side	  Listening socket (bound to port)
+Socket 3	 Server side	  Accepted socket (created per connection)
