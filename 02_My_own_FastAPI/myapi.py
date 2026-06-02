@@ -4,12 +4,11 @@ This file will contain the following:
     router
     decorators
     server
+    It will use inbuilt python libraries like socket and json
 '''
-
-
+# Task is to understand it properly from top to bottom, then giving a feature to stop the server, implement full CRUD.
 import socket
 import json
-
 
 class MiniAPI:
 
@@ -22,7 +21,6 @@ class MiniAPI:
 
     # GET Decorator------------------------------
     def get(self, path):
-
         def decorator(func):
             self.routes["GET"][path] = func
             return func
@@ -30,18 +28,16 @@ class MiniAPI:
 
     # POST Decorator------------------------------
     def post(self, path):
-
         def decorator(func):
             self.routes["POST"][path] = func
             return func
-
         return decorator
 
 
     # Start Server------------------------------
     def run(self, host="127.0.0.1", port=8000):
 
-        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # IPv4 and TCP because HTTP uses TCP.
         server_socket.bind((host, port))
         server_socket.listen(5)
         print(f"Server running on http://{host}:{port}")
@@ -80,11 +76,11 @@ class MiniAPI:
             # -----------------------------
             elif method == "POST":
 
-                body = lines[-1]
+                body = lines[-1] # Gets last line of request.
                 data = {}
 
                 if body:
-                    data = json.loads(body)
+                    data = json.loads(body) # Convert JSON → Python Dictionary
 
                 if path in self.routes["POST"]:
                     result = self.routes["POST"][path](data)
@@ -100,7 +96,7 @@ class MiniAPI:
     # -----------------------------
     def create_response(self, data):
 
-        json_data = json.dumps(data)
+        json_data = json.dumps(data) # Convert Python Dictionary → JSON
 
         response = (
             "HTTP/1.1 200 OK\r\n"
@@ -108,7 +104,7 @@ class MiniAPI:
             "\r\n"
             f"{json_data}"
         )
-        return response.encode()
+        return response.encode() # Convert String → Bytes because Sockets send bytes only.
 
     # -----------------------------
     # 404 Response
@@ -121,8 +117,7 @@ class MiniAPI:
             "\r\n"
             '{"error": "Route not found"}'
         )
-
-        return response.encode()
+        return response.encode() # Convert String → Bytes because Sockets send bytes only.
 
     # -----------------------------
     # 500 Response
@@ -135,6 +130,5 @@ class MiniAPI:
             "\r\n"
             f'{{"error": "{error}"}}'
         )
-
-        return response.encode()
+        return response.encode() # Convert String → Bytes because Sockets send bytes only.
 
