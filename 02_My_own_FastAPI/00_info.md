@@ -56,3 +56,7 @@ Socket	   Location	     Purpose
 Socket 1	 Client side	  Used by client to connect & communicate
 Socket 2	 Server side	  Listening socket (bound to port)
 Socket 3	 Server side	  Accepted socket (created per connection)
+
+
+#### Not to forget
+Socket always deals with bytes while sending informations.
